@@ -1,11 +1,19 @@
-<ul>
-  <% @books.each do |book| %>
-      <li>
-        <%= book.name %>
-        <%= link_to 'Show', book_path(book) %>
-        <%= link_to 'Edit', edit_book_path(book) %>
-        <%= button_to 'Delete', book_path(book), :method => :delete %>
-      </li>
-  <% end %>
-</ul>
+<h2>Book Lists</h2>
+<table class="table table-striped">
+  <thead>
+      <th>Name</th>
+      <th>Show</th>
+      <th>Edit</th>
+      <th>Delete</th>
+  </thead>
+    <% @books.each do |book| %>
+      <tr>
+        <td><%= book.name %></td>>
+        <td><%= link_to 'Show', book_path(book) %></td>
+        <td><%= link_to 'Edit', edit_book_path(book) %></td>
+        <td><%= button_to 'Delete', book_path(book), :method => :delete %></td>
+      </tr>
+    <% end %>
+</table>
 <%= link_to 'New Event', new_book_path %>
+<%= paginate @books %>
