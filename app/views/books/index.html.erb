@@ -2,10 +2,10 @@
   <% @books.each do |book| %>
       <li>
         <%= book.name %>
-        <%= link_to 'Show', :controller => 'books', :action => 'show', :id => book %>
-        <%= link_to 'Edit', :controller => 'books', :action => 'edit', :id => book %>
-        <%= link_to 'Delete', :controller => 'books', :action => 'destroy', :id => book %>
+        <%= link_to 'Show', book_path(book) %>
+        <%= link_to 'Edit', edit_book_path(book) %>
+        <%= button_to 'Delete', book_path(book), :method => :delete %>
       </li>
   <% end %>
 </ul>
-<%= link_to 'New Event', :controller => 'books', :action => 'new' %>
+<%= link_to 'New Event', new_book_path %>

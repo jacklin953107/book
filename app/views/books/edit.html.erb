@@ -1,12 +1,5 @@
-<%= form_for @book, :url => { :controller => 'books', :action => 'update', :id => @book } do |f| %>
-    <%= f.label :name, "Name" %>
-    <%= f.text_field :name %>
+<%= form_for @book, :url => book_path(@book), :method => :patch do |f| %>
 
-    <%= f.label :description, "Description" %>
-    <%= f.text_area :description %>
-
-    <%= f.label :isbn, "ISBN" %>
-    <%= f.text_field :isbn %>
-
+    <%= render :partial => 'form', :locals => { :f => f } %>
     <%= f.submit "Update" %>
 <% end %>

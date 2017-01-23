@@ -1,5 +1,7 @@
 class BooksController < ApplicationController
 
+  before_action :set_book, :only => [:show, :edit, :update, :destroy]
+
   def index
     @books = Book.all
   end
@@ -13,7 +15,8 @@ class BooksController < ApplicationController
     @book.save
 
     if @book.save
-      redirect_to :action => :index
+      flash[:notice] = "新增成功！"
+      redirect_to books_url
     else
       render 'new'
     end
@@ -22,19 +25,17 @@ class BooksController < ApplicationController
   end
 
   def show
-    @book = Book.find(params[:id])
   end
 
   def edit
-    @book = Book.find(params[:id])
   end
 
   def update
-    @book = Book.find(params[:id])
     @book.update(book_params)
 
     if @book.update(book_params)
-      redirect_to :action => :show, :id => @book.id
+      flash[:notice] = "修改成功！"
+      redirect_to book_url(@book)
     else
       render 'edit'
     end
@@ -43,16 +44,19 @@ class BooksController < ApplicationController
   end
 
   def destroy
-    @book = Book.find(params[:id])
     @book.destroy
-
-    redirect_to :action => :index
+    flash[:alert] = "刪除成功！"
+    redirect_to books_url
   end
 
   private
 
   def book_params
     params.require(:book).permit(:name, :description, :isbn)
+  end
+
+  def set_book
+    @book = Book.find(params[:id])
   end
 
 end

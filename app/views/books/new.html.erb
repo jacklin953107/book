@@ -1,12 +1,5 @@
-<%= form_for @book, :url => { :controller => 'books', :action => 'create' } do |f| %>
-    <%= f.label :name, "BookName" %>
-    <%= f.text_field :name %>
+<%= form_for @book, :url => books_path do |f| %>
 
-    <%= f.label :description, "Description" %>
-    <%= f.text_area :description %>
-
-    <%= f.label :isbn, "ISBN" %>
-    <%= f.text_field :isbn %>
-
+    <%= render :partial => 'form', :locals => { :f => f } %>
     <%= f.submit "Create" %>
 <% end %>
